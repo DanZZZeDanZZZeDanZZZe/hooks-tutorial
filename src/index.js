@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 const App = () => {
   return (
-    <HookSwither/>
+    <React.Fragment>
+        <HookSwither/>
+        <Notification/>
+    </React.Fragment>
   )
 }
 
@@ -31,6 +34,17 @@ const HookSwither = () => {
   )
 }
 
+const Notification = ({ value }) => {
+
+    const [visible, setVisible] = useState(true)
+
+    useEffect(() => {
+        const timeout = setTimeout(()=>setVisible(false), 1500)
+        return () => clearTimeout(timeout)
+    }, []);
+
+    return <div><p>Hello</p></div>
+}
 ReactDOM.render(
   <React.StrictMode>
     <App />
